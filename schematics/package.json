@@ -1,15 +1,18 @@
 {
   "name": "@dnation/web3",
   "version": "0.0.0",
-  "description": "A schematics",
+  "description": "A schematics for build decentralised application with Angular and web3",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && npx jasmine ./src/**/*_spec.js"
   },
+  "homepage": "https://github.com/dappsnation/web3-schematics",
   "keywords": [
-    "schematics"
+    "dappsnation",
+    "schematics",
+    "web3"
   ],
-  "author": "",
+  "author": "grandschtroumpf",
   "license": "MIT",
   "schematics": "./src/collection.json",
   "dependencies": {

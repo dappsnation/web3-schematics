@@ -1,6 +1,5 @@
 /**
  * Source code uses this example : https://nitayneeman.com/posts/making-an-addable-angular-package-using-schematics/
- * Checkout ngadd : https://github.com/angular/angular/blob/master/packages/elements/schematics/ng-add/index.ts
  */
 import { Schema } from './schema';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
@@ -72,7 +71,7 @@ function installWeb3(): Rule {
 /** Add a webpack.config.js file with config for Web3 */
 function addWebpackConfig() {
   return (host: Tree, context: SchematicContext) => {
-    host.create(`${host.root.path}/webpack.config.js`, webpackConfig);
+    host.overwrite(`webpack.config.js`, webpackConfig);
     context.logger.log('info', `✅️ Created Webpack Config`);
     return host;
   };
@@ -106,12 +105,13 @@ function addInjectionToken(opts: Schema): Rule {
     const ws = getWorkspace(host);
     const projectName = opts.project || ws.defaultProject;
     const project = getProjectFromWorkspace(ws, projectName);
+    if (host.get(`${project.sourceRoot}/app/web3.ts`)) { return host; }
 
     context.logger.log('info', `✅️ add web3 in ${project.sourceRoot}/app`);
     return mergeWith(
       apply(url('./files'), [
         template({}),
-        move('/', `${project.sourceRoot}/app`)
+        move(`${project.sourceRoot}/app`)
       ])
     );
   };
