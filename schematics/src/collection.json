@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Install web3 for Angular",
+      "schema": "./ng-add/schema.json",
+      "factory": "./ng-add/index"
+    }
+  }
+}
